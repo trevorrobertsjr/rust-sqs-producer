@@ -14,7 +14,12 @@
             exit(1);
        }
     };
-    let queue_url = "https://sqs.us-east-1.amazonaws.com/".to_owned()+&account+"/"+myqueue;
+
+    // Non-idiomatic way to concatenante strings. Requires managing ownership and borrowing account var
+    // let queue_url = "https://sqs.us-east-1.amazonaws.com/".to_owned()+&account+"/"+myqueue;
+
+    // Idiomatic string concatenation in Rust
+    let queue_url = format!("{}{}{}{}","https://sqs.us-east-1.amazonaws.com/",account,"/",myqueue);
  
     println!(
         "Sending messages to SQS Queue: `{}` in account `{:#?}`",
